@@ -14,7 +14,7 @@ def insert(groups, usuarios, message):
 	conn = engine.connect()
 	conn
 	metadata.create_all(engine)
-	ins = formulario.insert().values(post=str(message), tokens=str(usuarios), groups=str(groups))
+	ins = formulario.insert().values(post=str(message), tokens=str(usuarios), groups=str(groups), notification='Done')
 	ins.compile().params
 	result = conn.execute(ins)
 	ins.bind = engine
