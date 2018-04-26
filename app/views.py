@@ -35,9 +35,9 @@ def params():
     usuarios = users(tokens)
     groups = IDgroups(grupos)
     print(len(message))
-    insert(groups, usuarios, message)
     if len(groups) >= 1 and len(usuarios) >= 1 and len(message) != 0:
         ite_groups(groups,message,usuarios)
+        insert(groups, usuarios, message)
         valor1 = 'parametros enviados'
     else:
         valor1 = 'faltan parametros'
