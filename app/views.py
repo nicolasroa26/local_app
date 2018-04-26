@@ -1,6 +1,7 @@
 from post import postfb, ite_groups
 from flask import request, redirect, render_template
 from app import app
+from db import insert
 
 def users(tokens):
 	usuarios={}
@@ -34,9 +35,10 @@ def params():
     usuarios = users(tokens)
     groups = IDgroups(grupos)
     print(len(message))
+    insert(groups, usuarios, message)
     if len(groups) >= 1 and len(usuarios) >= 1 and len(message) != 0:
         ite_groups(groups,message,usuarios)
-        valor1 = 'post exitoso'
+        valor1 = 'parametros enviados'
     else:
         valor1 = 'faltan parametros'
     return render_template('index.html', valor1 = valor1)
