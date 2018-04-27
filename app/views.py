@@ -2,7 +2,7 @@ from post import postfb, ite_groups
 from flask import request, redirect, render_template
 from app import app
 from db import insert
-
+import time
 def users(tokens):
 	usuarios={}
 	usuario = 0
@@ -34,7 +34,7 @@ def params():
     grupos = request.form['grupos']
     usuarios = users(tokens)
     groups = IDgroups(grupos)
-    print(len(message))
+    time.sleep(5)
     if len(groups) >= 1 and len(usuarios) >= 1 and len(message) != 0:
         ite_groups(groups,message,usuarios)
         insert(groups, usuarios, message)
