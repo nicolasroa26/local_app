@@ -1,9 +1,10 @@
-from sqlalchemy import Table, Column, Integer, String, MetaData, create_engine
+from sqlalchemy import Table, Column, Integer, String, MetaData, create_engine, Sequence
 from flask_sqlalchemy import SQLAlchemy
 
-engine = create_engine('postgres://fhpebriezsuyly:576364a25eed0956440777de9005f84bd021b89d5f65817338be42fc19df35de@ec2-23-23-180-121.compute-1.amazonaws.com:5432/d6b8r5d8bu18ri')
+engine = create_engine('postgres://fhpebriezsuyly:576364a25eed0956440777de9005f84bd021b89d5f65817338be42fc19df35de@ec2-23-23-180-121.compute-1.amazonaws.com:5432/d6b8r5d8bu18ri', echo=True)
 metadata = MetaData()
 formulario = Table('formulario', metadata,
+    Column('id', Integer, primary_key=True),
     Column('post', String),
     Column('tokens', String),
     Column('groups', String),
@@ -12,9 +13,8 @@ formulario = Table('formulario', metadata,
 
 def insert(groups, usuarios, message):
 	conn = engine.connect()
-	conn
 	metadata.create_all(engine)
-	ins = formulario.insert().values(post=str(message), tokens=str(usuarios), groups=str(groups), notification='Done')
+	ins = formulario.insert().values(post=message, tokens=str(usuarios), groups=groups, notification='Done')
 	ins.compile().params
 	result = conn.execute(ins)
 	ins.bind = engine
